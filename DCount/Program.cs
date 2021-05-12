@@ -32,7 +32,7 @@ namespace DCount
         }
         static string FinRmv(string s)
         {
-            Regex reg = new Regex(@"[\d\d:]*");
+            Regex reg = new Regex(@"\d*\D[\d\d:]*");
             Match match = reg.Match(s);
             return match.ToString();
         }
