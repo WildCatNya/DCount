@@ -16,9 +16,23 @@ namespace DCount
             var arr = File.ReadAllLines(path);
             int count = arr.Length + 1;
             var tNow = DateTime.Now;
-            var tBefore = DateTime.Parse(Rmv(arr[count - 2]));
-            var tt = tNow - tBefore;
-            File.AppendAllText(path, $"{count}) {tNow} Прошло: {FinRmv(tt.ToString())}\n");
+
+            if (count == 1)
+            {
+                File.AppendAllText(path, $"{count}) {tNow}\n");
+            }
+            else if (count == 2)
+            {
+                var tBefore = DateTime.Parse(RmvFor2(arr[count - 2].ToString()));
+                var tt = tNow - tBefore;
+                File.AppendAllText(path, $"{count}) {tNow} Прошло: {tt}\n");
+            }
+            else
+            {
+                var tBefore = DateTime.Parse(Rmv(arr[count - 2]));
+                var tt = tNow - tBefore;
+                File.AppendAllText(path, $"{count}) {tNow} Прошло: {FinRmv(tt.ToString())}\n");
+            }
         }
         static string Rmv(string s)
         {
@@ -35,6 +49,13 @@ namespace DCount
             Regex reg = new Regex(@"\d*\D[\d\d:]*");
             Match match = reg.Match(s);
             return match.ToString();
+        }
+        static string RmvFor2(string s)
+        {
+            Regex reg = new Regex(@"\d*\D");
+            Match match = reg.Match(s);
+            s = s.Replace(match.ToString(), "").Trim();
+            return s;
         }
     }
 }
