@@ -6,14 +6,13 @@ namespace DCount
 {
     class Insert
     {
+        private static readonly string _path = "DCount.txt";
         private readonly string[] _items;
         private readonly DateTime _timeNow;
-        private readonly string _path;
-        public Insert(DateTime timeNow, string path)
+        public Insert(DateTime timeNow)
         {
             _items = File.ReadAllLines(_path);
             _timeNow = timeNow;
-            _path = path;
         }
         private DItem LastDItem
         {
